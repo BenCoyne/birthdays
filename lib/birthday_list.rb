@@ -1,3 +1,5 @@
+require 'date'
+
 class BirthdayList
 
   def initialize
@@ -13,11 +15,22 @@ class BirthdayList
       puts "- #{friend[:name]}: #{friend[:birthday]}"
     end
   end
+
+  def birthdays_today
+    @birthday_list.each do |friend| 
+      puts "It's #{friend[:name]}'s birthday today! They are #{calculate_age(friend)} years old!" if today?(friend)
+    end
+    return 
+  end
+
+  private
   
+  def today?(friend)
+    Date.today.strftime('%d/%m/') == friend[:birthday][0..5]
+  end
+
+  def calculate_age(friend)
+    Date.today.strftime('%Y').to_i - friend[:birthday][6..].to_i
+  end
 end
 
-# list = BirthdayList.new
-# list.add_friend('Phoebe Buffay', '16 February 1967')
-# list.add_friend('Chandler Bing', '08 April 1968')
-
-# list.display_birthdays
