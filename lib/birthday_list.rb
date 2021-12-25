@@ -1,4 +1,5 @@
 require 'date'
+require 'birthday'
 
 class BirthdayList
 
@@ -29,7 +30,7 @@ class BirthdayList
     Date.today
   end
 
-  def date_formatter(friend)
+  def bday_formatter(friend)
     friend[:birthday][0..5]
   end
   
@@ -38,7 +39,7 @@ class BirthdayList
   end
   
   def today?(friend)
-    today.strftime('%d/%m/') == date_formatter(friend)
+    today.strftime('%d/%m/') == bday_formatter(friend)
   end
 
   def calculate_age(friend)
