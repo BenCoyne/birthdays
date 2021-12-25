@@ -6,8 +6,8 @@ class BirthdayList
     @birthday_list = []
   end
 
-  def add_friend(name, birthday)
-    @birthday_list << {name: name, birthday: birthday}
+  def add_friend(name, date)
+    @birthday_list << {name: name, birthday: date}
   end
 
   def display_birthdays
@@ -24,13 +24,24 @@ class BirthdayList
   end
 
   private
+
+  def today
+    Date.today
+  end
+
+  def date_formatter(friend)
+    friend[:birthday][0..5]
+  end
+  
+  def year_formatter(friend)
+    friend[:birthday][6..].to_i
+  end
   
   def today?(friend)
-    Date.today.strftime('%d/%m/') == friend[:birthday][0..5]
+    today.strftime('%d/%m/') == date_formatter(friend)
   end
 
   def calculate_age(friend)
-    Date.today.strftime('%Y').to_i - friend[:birthday][6..].to_i
+    today.year - year_formatter(friend)
   end
 end
-
